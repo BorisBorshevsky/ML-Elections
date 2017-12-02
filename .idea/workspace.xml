@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c30eae9-0455-4b4b-9800-242be26384e4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main2.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/ElectionsData-test.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/ElectionsData-train.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/ElectionsData-validation.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main.old.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ABC.ipynb" afterPath="$PROJECT_DIR$/ABC.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW02.ipynb" afterPath="$PROJECT_DIR$/HW02.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_test.csv" afterPath="$PROJECT_DIR$/data/output/processed_test.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_train.csv" afterPath="$PROJECT_DIR$/data/output/processed_train.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_validation.csv" afterPath="$PROJECT_DIR$/data/output/processed_validation.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_test.csv" afterPath="$PROJECT_DIR$/data/output/raw_test.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_train.csv" afterPath="$PROJECT_DIR$/data/output/raw_train.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_validation.csv" afterPath="$PROJECT_DIR$/data/output/raw_validation.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../the-elections-challenge/Clustering.ipynb" afterPath="$PROJECT_DIR$/../the-elections-challenge/Clustering.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../the-elections-challenge/data_preparation.py" afterPath="$PROJECT_DIR$/../the-elections-challenge/data_preparation.py" />
@@ -33,11 +24,21 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3630">
-              <caret line="242" column="0" lean-forward="true" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
+            <state relative-caret-position="220">
+              <caret line="240" column="7" lean-forward="false" selection-start-line="240" selection-start-column="7" selection-end-line="240" selection-end-column="7" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="103" column="14" lean-forward="false" selection-start-line="103" selection-start-column="14" selection-end-line="103" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,16 +83,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frame.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.pyenv/versions/anaconda2-5.0.0/lib/python2.7/site-packages/pandas/core/frame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70890">
-              <caret line="4816" column="8" lean-forward="false" selection-start-line="4816" selection-start-column="8" selection-end-line="4816" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="processed_test.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/output/processed_test.csv">
           <provider selected="true" editor-type-id="text-editor">
@@ -128,8 +119,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="105">
-                <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+              <first_editor relative-caret-position="343">
+                <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -196,13 +187,14 @@
       <list>
         <option value="$PROJECT_DIR$/../the-elections-challenge/clustering.py" />
         <option value="$PROJECT_DIR$/../the-elections-challenge/looking at the data.ipynb" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Election.ipynb" />
         <option value="$PROJECT_DIR$/../the-elections-challenge/data_preparation.py" />
         <option value="$PROJECT_DIR$/test/main.py" />
         <option value="$PROJECT_DIR$/../MLEx/Election/data_preparation.py" />
         <option value="$PROJECT_DIR$/main.old.py" />
         <option value="$PROJECT_DIR$/main2.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -501,13 +493,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../the-elections-challenge/Clustering.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../the-elections-challenge/alternative_coalition.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -795,23 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="105">
-            <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../the-elections-challenge/looking at the data.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -870,12 +838,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="103" column="14" lean-forward="false" selection-start-line="103" selection-start-column="14" selection-end-line="103" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="343">
+            <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3630">
-          <caret line="242" column="0" lean-forward="true" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
+        <state relative-caret-position="220">
+          <caret line="240" column="7" lean-forward="false" selection-start-line="240" selection-start-column="7" selection-end-line="240" selection-end-column="7" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -24,11 +24,4 @@ Machine Learning 101
 2. Feature selection
     
             
-               
-
-    
-    2. Change all categorial features to numbers
-         1. if there missing values set as the most common category for this label.
-         2. for every not comparable feature, create a boolean column (0 or 1).
-    2. remove errors (bad values)
-3. 
+            

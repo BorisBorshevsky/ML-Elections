@@ -1,3 +1,5 @@
+from IPython import embed
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -7,7 +9,6 @@ from sklearn.feature_selection import RFECV
 from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import preprocessing
-from IPython import embed
 
 # Tree-based feature selection
 from sklearn.ensemble import ExtraTreesClassifier
@@ -24,14 +25,14 @@ def import_data():
 	df = pd.read_csv("./data/ElectionsData-full.csv", header=0)
 
 	df['split'] = 0
-	indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
-	df['split'][indices.next()] = 1
-	df['split'][indices.next()] = 2
-	raw_data = df.copy()
+	#     indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
+	#     df['split'][indices.next()] = 1
+	#     df['split'][indices.next()] = 2
+	#     raw_data = df.copy()
 
-	raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
-	raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
-	raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False)
 
 	return df
 
@@ -217,7 +218,6 @@ transform_manual(df)
 print "Before outliar detacction: " + str(df.shape[0])
 df = outliar_detection(df, numeric_features)
 print "After outliar detacction: " + str(df.shape[0])
-scale_numeric(df, numeric_features)
 
 df_data_X, df_data_Y, features_list = to_np_array(df)
 df_data_X = preprocessing.scale(df_data_X)
@@ -238,9 +238,9 @@ good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, featur
 useful_features.extend(good_features)
 
 useful_features = list(set(useful_features))
+embed()
 print useful_features
-# embed()
 
-export_transformed_data(df)
+# export_transformed_data(df)
 
 
