@@ -6,14 +6,15 @@ from sklearn.cross_validation import KFold
 from sklearn.feature_selection import RFECV
 from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
-from sklearn import preprocessing
-from IPython import embed
 
 # Tree-based feature selection
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.feature_selection import SelectPercentile, f_classif, mutual_info_classif
+from IPython import embed
+# Misc code
+embed()
 
 redundant_features = []
 useful_features = []
@@ -24,14 +25,14 @@ def import_data():
 	df = pd.read_csv("./data/ElectionsData-full.csv", header=0)
 
 	df['split'] = 0
-	indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
-	df['split'][indices.next()] = 1
-	df['split'][indices.next()] = 2
-	raw_data = df.copy()
+	#     indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
+	#     df['split'][indices.next()] = 1
+	#     df['split'][indices.next()] = 2
+	#     raw_data = df.copy()
 
-	raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
-	raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
-	raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
+	#     raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False)
 
 	return df
 
@@ -113,15 +114,15 @@ def transform_manual(_df):
 
 
 def to_np_array(_df):
-	df_data_X = _df.drop(['split', 'Vote'], axis=1).values
+	df_data_X = _df.drop(['split'], axis=1).values
 	df_data_Y = _df.Vote.values
-	features_list = _df.drop(['split', 'Vote'], axis=1).columns
+	features_list = _df.drop(['split'], axis=1).columns
 	return [df_data_X, df_data_Y, features_list]
 
 
 def variance_filter(data_X, features_list):
-	varsel = VarianceThreshold(threshold=0.01)
-	varsel.fit_transform(data_X)
+	varsel = VarianceThreshold(threshold=0.02)
+	data_X = varsel.fit_transform(data_X)
 	featsel_idx = varsel.get_support()
 	print 'Removing features with low variance - ', '\t', list(features_list[~featsel_idx])
 	return list(features_list[~featsel_idx])
@@ -129,7 +130,6 @@ def variance_filter(data_X, features_list):
 
 def select_features_with_rfe(data_X, data_Y, feature_names):
 	result = []
-
 	svc = SVC(kernel="linear", C=1)
 	rfecv = RFECV(estimator=svc, step=1, cv=3, scoring='accuracy')
 	rfecv.fit(data_X, data_Y)
@@ -140,64 +140,6 @@ def select_features_with_rfe(data_X, data_Y, feature_names):
 		if val:
 			print "RFE - Choosing feature: " + feature_names[idx]
 			result.append(feature_names[idx])
-	return result
-
-
-def univariate_features_with_mi(data_X, data_Y, feature_names):
-	result = []
-
-	selector = SelectPercentile(mutual_info_classif, percentile=25)
-	selector.fit(data_X, data_Y)
-
-	for idx, val in enumerate(selector.get_support()):
-		if val:
-			result.append(feature_names[idx])
-			print "MI - Choosing feature: " + feature_names[idx]
-
-	return result
-
-
-def univariate_features_with_f_classif(data_X, data_Y, feature_names):
-	result = []
-
-	selector = SelectPercentile(f_classif, percentile=25)
-	selector.fit(data_X, data_Y)
-
-	for idx, val in enumerate(selector.get_support()):
-		if val:
-			result.append(feature_names[idx])
-			print "f-classif - Choosing feature: " + feature_names[idx]
-
-	return result
-
-
-def univariate_features_with_f_classif(data_X, data_Y, feature_names):
-	result = []
-
-	selector = SelectPercentile(f_classif, percentile=25)
-	selector.fit(data_X, data_Y)
-
-	for idx, val in enumerate(selector.get_support()):
-		if val:
-			result.append(feature_names[idx])
-			print "f-classif - Choosing feature: " + feature_names[idx]
-
-	return result
-
-
-def embedded_features_by_descision_tree(data_X, data_Y, feature_names):
-	result = []
-
-	clf = ExtraTreesClassifier()
-	clf = clf.fit(data_X, data_Y)
-	tree_weights = clf.feature_importances_
-	tree_weights /= tree_weights.max()
-	tree_booleans = tree_weights > np.percentile(tree_weights, 75)
-	for idx, val in enumerate(tree_booleans):
-		if val:
-			result.append(feature_names[idx])
-			print "Tree Clasifier - Choosing feature: " + feature_names[idx]
-
 	return result
 
 
@@ -220,7 +162,6 @@ print "After outliar detacction: " + str(df.shape[0])
 scale_numeric(df, numeric_features)
 
 df_data_X, df_data_Y, features_list = to_np_array(df)
-df_data_X = preprocessing.scale(df_data_X)
 
 features_to_exclude = variance_filter(df_data_X, features_list)
 redundant_features.extend(features_to_exclude)
@@ -228,19 +169,46 @@ redundant_features.extend(features_to_exclude)
 good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
 useful_features.extend(good_features)
 
-good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
+useful_features
 
-good_features = univariate_features_with_f_classif(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
 
-good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
 
-useful_features = list(set(useful_features))
-print useful_features
-# embed()
+# # The "accuracy" scoring is proportional to the number of correct
+# # classifications
+# svc = SVC(kernel="linear", C=1)
+# rfecv = RFECV(estimator=svc, step=1, cv=3, scoring='accuracy')
+# rfecv.fit(df_data_X, df_data_Y)
+#
+# print "RFE #1"
+# for idx, val in enumerate(rfecv.get_support()):
+#     if val:
+#         print feat_names[idx]
+#
+# print("Optimal number of features : %d" % rfecv.n_features_)
+#
+# # Univariate feature selection with F-test for feature scoring
+# # We use the default selection function: the 15% most significant features
+# selector = SelectPercentile(f_classif, percentile=15)
+# selector.fit(df_data_X, df_data_Y)
+# f_scores = selector.scores_
+# f_scores /= f_scores.max()
+#
+# print "F CLASSIF"
+# for idx, val in enumerate(selector.get_support()):
+#     if val:
+#         print feat_names[idx]
+#
+# # Univariate feature selection with mutual information for feature scoring
+# selector = SelectPercentile(mutual_info_classif, percentile=15)
+# selector.fit(df_data_X, df_data_Y)
+#
+# print "MI"
+# for idx, val in enumerate(selector.get_support()):
+#     if val:
+#         print feat_names[idx]
+#
+# print redundant_features
 
-export_transformed_data(df)
+# export_transformed_data(df)
 
 
