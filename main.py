@@ -16,23 +16,20 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.feature_selection import SelectPercentile, f_classif, mutual_info_classif
 
-redundant_features = []
-useful_features = []
-
 
 def import_data():
 	# For .read_csv, always use header=0 when you know row 0 is the header row
 	df = pd.read_csv("./data/ElectionsData-full.csv", header=0)
 
 	df['split'] = 0
-	#     indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
-	#     df['split'][indices.next()] = 1
-	#     df['split'][indices.next()] = 2
-	#     raw_data = df.copy()
+	indices = KFold(n=len(df), n_folds=5, shuffle=True)._iter_test_indices()
+	df['split'][indices.next()] = 1
+	df['split'][indices.next()] = 2
+	raw_data = df.copy()
 
-	#     raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
-	#     raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
-	#     raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False)
+	raw_data[raw_data['split'] == 0].drop('split', axis=1).to_csv('./data/output/raw_train.csv', index=False, sep=',')
+	raw_data[raw_data['split'] == 1].drop('split', axis=1).to_csv('./data/output/raw_test.csv', index=False, sep=',')
+	raw_data[raw_data['split'] == 2].drop('split', axis=1).to_csv('./data/output/raw_validation.csv', index=False)
 
 	return df
 
@@ -59,7 +56,9 @@ def fill_numeric_features(_df, features):
 
 def fill_categorical_features(_df, features):
 	for f in features:
-		_df[f].fillna(_df[f].value_counts().idxmax(), inplace=True)
+		for index, row in _df[_df[f].isnull()].iterrows():
+			most_common_ = _df[(_df.Vote == row['Vote'])][f].value_counts().idxmax()
+			_df.at[index, f] = most_common_
 
 
 def transform_categorical_features(_df, features):
@@ -74,12 +73,13 @@ def transform_label(_df, label):
 
 
 def outliar_detection(_df, features):
-	# Outliar detection
-	threshold = 3
-	for f in numeric_features:
+	std_threshold = 3
+
+	for f in features:
 		std = _df[f].std()
 		mean = _df[f].mean()
-		_df = _df[_df[f].between(mean - threshold * std, mean + threshold * std)]
+		# _df = _df[_df[f].between(mean - std_threshold * std, mean + std_threshold * std)]
+		_df[~_df[f].between(mean - std_threshold * std, mean + std_threshold * std)] = np.nan
 	return _df
 
 
@@ -93,8 +93,7 @@ def transform_bool(_df, name):
 
 
 def transform_category(_df, name):
-	redundant_features.append(name)
-	for cat in df[name].unique():
+	for cat in _df[name].unique():
 		_df["Is_" + name + "_" + cat] = (_df[name] == cat).astype(int)
 	del _df[name]
 
@@ -202,45 +201,50 @@ def embedded_features_by_descision_tree(data_X, data_Y, feature_names):
 	return result
 
 
-# redundant_features = []
-# useful_features = []
+def main():
+	redundant_features = []
+	useful_features = []
 
-df = import_data()
+	df = import_data()
 
-all_features, categorical_features, numeric_features = group_features(df)
+	all_features, categorical_features, numeric_features = group_features(df)
 
-fill_numeric_features(df, numeric_features)
-fill_categorical_features(df, categorical_features)
-# transform_categorical_features(df, categorical_features)  # We Don't need that!!
-transform_label(df, "Vote")
-transform_manual(df)
+	fill_numeric_features(df, numeric_features)
+	fill_categorical_features(df, categorical_features)
+	# transform_categorical_features(df, categorical_features)  # We Don't need that!!
+	transform_label(df, "Vote")
+	transform_manual(df)
 
-print "Before outliar detacction: " + str(df.shape[0])
-df = outliar_detection(df, numeric_features)
-print "After outliar detacction: " + str(df.shape[0])
+	scale_numeric(df, numeric_features)
+	print "Before outliar detacction: " + str(df.shape[0])
+	df = outliar_detection(df, numeric_features)
+	print "After outliar detacction: " + str(df.shape[0])
 
-df_data_X, df_data_Y, features_list = to_np_array(df)
-df_data_X = preprocessing.scale(df_data_X)
+	df_no_NAN = df.dropna()
 
-features_to_exclude = variance_filter(df_data_X, features_list)
-redundant_features.extend(features_to_exclude)
+	df_data_X, df_data_Y, features_list = to_np_array(df_no_NAN)
+	df_data_X = preprocessing.scale(df_data_X)
 
-good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
+	features_to_exclude = variance_filter(df_data_X, features_list)
+	redundant_features.extend(features_to_exclude)
 
-good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
+	# good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
+	# useful_features.extend(good_features)
+	#
+	good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
+	useful_features.extend(good_features)
 
-good_features = univariate_features_with_f_classif(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
+	good_features = univariate_features_with_f_classif(df_data_X, df_data_Y, features_list)
+	useful_features.extend(good_features)
 
-good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, features_list)
-useful_features.extend(good_features)
+	good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, features_list)
+	useful_features.extend(good_features)
 
-useful_features = list(set(useful_features))
-embed()
-print useful_features
+	useful_features = list(set(useful_features))
+	embed()
+	print useful_features
+	export_transformed_data(df)
 
-# export_transformed_data(df)
 
-
+if __name__ == '__main__':
+	main()
