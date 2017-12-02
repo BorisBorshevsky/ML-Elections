@@ -24,20 +24,20 @@ def main():
 
 	fill_numeric_features(df, numeric_features)
 	fill_categorical_features(df, categorical_features)
-	transform_categorical_features(df, categorical_features)
-	transform_label(df, "Vote")
+	# transform_categorical_features(df, categorical_features)
+	# transform_label(df, "Vote")
 
 	df = df.dropna()
 
-	# # Change all categorial to numeric
-	# ObjFeat = df.keys()[df.dtypes.map(lambda x: x == 'object')]
-	#
-	# # Transform the original features to categorical
-	# # Creat new 'int' features, resp.
-	# for f in ObjFeat:
-	# 	df[f] = df[f].astype("category")
-	# 	df[f + "Int"] = df[f].cat.rename_categories(range(df[f].nunique())).astype(int)
-	# 	df.loc[df[f].isnull(), f + "Int"] = np.nan  # fix NaN conversion
+	# Change all categorial to numeric
+	ObjFeat = df.keys()[df.dtypes.map(lambda x: x == 'object')]
+
+	# Transform the original features to categorical
+	# Creat new 'int' features, resp.
+	for f in ObjFeat:
+		df[f] = df[f].astype("category")
+		df[f + "Int"] = df[f].cat.rename_categories(range(df[f].nunique())).astype(int)
+		df.loc[df[f].isnull(), f + "Int"] = np.nan  # fix NaN conversion
 
 	# Outliar detection
 	threshold = 3
@@ -75,10 +75,10 @@ def main():
 
 	df = df.drop(category_features, axis=1)
 
-	feat_names = df.drop(['Vote', 'split'], axis=1).columns.values
+	feat_names = df.drop(['split'], axis=1).columns.values
 
 	# Convert to np array
-	df_data_X = df.drop(['Vote', 'split'], axis=1).values
+	df_data_X = df.drop(['split'], axis=1).values
 	df_data_Y = df.Vote.values
 
 	# Remove feature with low varriance
