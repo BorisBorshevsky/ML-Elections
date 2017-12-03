@@ -320,7 +320,7 @@ def main():
 	print "### Final features ###"
 	print list(set(useful_features).difference(redundant_features))
 
-	export_transformed_data(df[useful_features + ['Vote']])
+	export_transformed_data(df[useful_features + ['Vote', 'split']])
 
 	base_feature = map(lambda x: dic[x], useful_features)
 	print "### Base features ###"
