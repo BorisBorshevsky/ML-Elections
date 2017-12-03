@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c30eae9-0455-4b4b-9800-242be26384e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ABC.ipynb" afterPath="$PROJECT_DIR$/ABC.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_test.csv" afterPath="$PROJECT_DIR$/data/output/processed_test.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_train.csv" afterPath="$PROJECT_DIR$/data/output/processed_train.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/processed_validation.csv" afterPath="$PROJECT_DIR$/data/output/processed_validation.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_test.csv" afterPath="$PROJECT_DIR$/data/output/raw_test.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_train.csv" afterPath="$PROJECT_DIR$/data/output/raw_train.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/output/raw_validation.csv" afterPath="$PROJECT_DIR$/data/output/raw_validation.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../the-elections-challenge/Clustering.ipynb" afterPath="$PROJECT_DIR$/../the-elections-challenge/Clustering.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../the-elections-challenge/data_preparation.py" afterPath="$PROJECT_DIR$/../the-elections-challenge/data_preparation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../the-elections-challenge/looking at the data.ipynb" afterPath="$PROJECT_DIR$/../the-elections-challenge/looking at the data.ipynb" />
@@ -28,8 +19,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="167" column="15" lean-forward="false" selection-start-line="167" selection-start-column="10" selection-end-line="167" selection-end-column="15" />
+            <state relative-caret-position="97">
+              <caret line="238" column="13" lean-forward="true" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -70,8 +61,8 @@
       <file leaf-file-name="processed_test.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/output/processed_test.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+            <state relative-caret-position="450">
+              <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -849,8 +840,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/output/processed_test.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        <state relative-caret-position="450">
+          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -898,8 +889,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="167" column="15" lean-forward="false" selection-start-line="167" selection-start-column="10" selection-end-line="167" selection-end-column="15" />
+        <state relative-caret-position="97">
+          <caret line="238" column="13" lean-forward="true" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
