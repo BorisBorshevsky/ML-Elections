@@ -17,6 +17,8 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.feature_selection import SelectPercentile, f_classif, mutual_info_classif
 
+pd.options.mode.chained_assignment = None
+
 
 def import_data():
 	# For .read_csv, always use header=0 when you know row 0 is the header row
@@ -41,11 +43,14 @@ def export_transformed_data(_df):
 	_df[_df['split'] == 2].drop('split', axis=1).to_csv('./data/output/processed_validation.csv', index=False)
 
 
-def group_features(_df):
+def group_features(_df, _dic):
 	_df = _df.dropna()
 	all_features = _df.drop(['Vote', 'split'], axis=1).columns
 	categorical_features = _df.drop(['Vote', 'split'], axis=1).select_dtypes(include=["object"])
 	numeric_features = _df.drop(['Vote', 'split'], axis=1).select_dtypes(exclude=["object"])
+
+	for column in _df.columns:
+		_dic[column] = column
 
 	return [all_features, categorical_features, numeric_features]
 
@@ -55,6 +60,33 @@ def fill_numeric_features(_df, features):
 		_df[f].fillna(_df[f].median(), inplace=True)
 
 
+def fill_numeric_by_correlation(_df, factor, features):
+	redundant_features = []
+	cor = _df[features.columns].dropna().corr()
+	print "We choose " + str(factor) + " correlation as correlated"
+	indices = np.where(cor > factor)
+	indices = [(cor.index[x], cor.columns[y]) for x, y in zip(*indices) if x != y and x < y]
+	for pair in indices:
+		fill_f1_with_f2(_df, pair[0], pair[1])
+		redundant_features.append(pair[1])
+	return redundant_features
+
+
+def fill_f1_with_f2(_df, f1, f2):
+	ratio = _df[f1].mean() / _df[f2].mean()
+	print 'Filling ' + f1 + ' with ' + f2 + ' due to correlation'
+	for index, row in _df[_df[f1].isnull()].iterrows():
+		if ~np.isnan(_df[f2][index]):
+			_df[f1][index] = _df[f2][index] * ratio
+
+	ratio = _df[f2].mean() / _df[f1].mean()
+	print 'Filling ' + f2 + ' with ' + f1 + ' due to correlation'
+	for index, row in _df[_df[f2].isnull()].iterrows():
+		if ~np.isnan(_df[f1][index]):
+			_df[f2][index] = _df[f1][index] * ratio
+
+
+
 def fill_categorical_features(_df, features):
 	for f in features:
 		for index, row in _df[_df[f].isnull()].iterrows():
@@ -62,11 +94,12 @@ def fill_categorical_features(_df, features):
 			_df.at[index, f] = most_common
 
 
-def transform_categorical_features(_df, features):
+def transform_categorical_features(_df, _dic, features):
 	for f in features:
 		_df[f] = _df[f].astype("category")
 		_df[f + "_Int"] = _df[f].cat.rename_categories(range(_df[f].nunique())).astype(int)
 		_df.loc[_df[f].isnull(), f + "_Int"] = np.nan  # fix NaN conversion3
+		_dic[f + "_Int"] = f
 
 
 def transform_label(_df, label):
@@ -92,13 +125,14 @@ def transform_bool(_df, name):
 	_df[name] = _df[name].map({'No': -1, "Maybe": 0, 'Yes': 1}).astype(int)
 
 
-def transform_category(_df, name):
+def transform_category(_df, _dic, name):
 	for cat in _df[name].unique():
 		_df["Is_" + name + "_" + cat] = (_df[name] == cat).astype(int)
+		_dic["Is_" + name + "_" + cat] = name
 	del _df[name]
 
 
-def transform_manual(_df):
+def transform_manual(_df, _dic):
 	_df["Age_group"] = _df["Age_group"].map({'Below_30': 0, '30-45': 1, '45_and_up': 2}).astype(int)
 	_df["Voting_Time"] = _df["Voting_Time"].map({'By_16:00': 0, 'After_16:00': 1}).astype(int)
 	_df["Gender"] = _df["Gender"].map({'Male': -1, 'Female': 1}).astype(int)
@@ -107,9 +141,9 @@ def transform_manual(_df):
 	transform_bool(_df, "Married")
 	transform_bool(_df, "Financial_agenda_matters")
 	transform_bool(_df, "Will_vote_only_large_party")
-	transform_category(_df, "Most_Important_Issue")
-	transform_category(_df, "Occupation")
-	transform_category(_df, "Main_transportation")
+	transform_category(_df, _dic, "Most_Important_Issue")
+	transform_category(_df, _dic, "Occupation")
+	transform_category(_df, _dic, "Main_transportation")
 
 
 def to_np_array(_df):
@@ -220,23 +254,30 @@ def embedded_features_by_descision_tree(data_X, data_Y, feature_names):
 def main():
 	redundant_features = []
 	useful_features = []
+	dic = {}
 
 	df = import_data()
 
-	all_features, categorical_features, numeric_features = group_features(df)
+	all_features, categorical_features, numeric_features = group_features(df, dic)
+	not_needed_features = fill_numeric_by_correlation(df, 0.95, numeric_features)
+	fill_numeric_by_correlation(df, 0.8, numeric_features)
+	print "# Added not_needed_features to redundant features"
+	redundant_features.extend(not_needed_features)
 
 	fill_numeric_features(df, numeric_features)
 	fill_categorical_features(df, categorical_features)
 	# transform_categorical_features(df, categorical_features)  # We Don't need that!!
 	transform_label(df, "Vote")
-	transform_manual(df)
+	transform_manual(df, dic)
 
 	scale_numeric(df, numeric_features)
 	print "Before outliar detacction: " + str(df.shape[0])
 	df = outliar_detection(df, numeric_features)
 	print "After outliar detacction: " + str(df.shape[0])
 
-	df_no_NAN = df.dropna()
+	print "## redundant features"
+	print redundant_features
+	df_no_NAN = df.drop(redundant_features, axis=1).dropna()
 
 	df_data_X, df_data_Y, features_list = to_np_array(df_no_NAN)
 	df_data_X = preprocessing.scale(df_data_X)
@@ -245,18 +286,28 @@ def main():
 	redundant_features.extend(features_to_exclude)
 
 	good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
+	print '# ADDED Features'
+	print list(set(good_features).difference(useful_features))
 	useful_features.extend(good_features)
-	#
+
 	good_features = select_features_with_rfe_with_stratified_k_fold(df_data_X, df_data_Y, features_list)
+	print '# ADDED Features'
+	print list(set(good_features).difference(useful_features))
 	useful_features.extend(good_features)
 
 	good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
+	print '# ADDED Features'
+	print list(set(good_features).difference(useful_features))
 	useful_features.extend(good_features)
 
 	good_features = univariate_features_with_f_classif(df_data_X, df_data_Y, features_list)
+	print '# ADDED Features'
+	print list(set(good_features).difference(useful_features))
 	useful_features.extend(good_features)
 
 	good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, features_list)
+	print '# ADDED Features'
+	print list(set(good_features).difference(useful_features))
 	useful_features.extend(good_features)
 
 	useful_features = list(set(useful_features))
@@ -269,7 +320,12 @@ def main():
 	print "### Final features ###"
 	print list(set(useful_features).difference(redundant_features))
 
-	export_transformed_data(df)
+	export_transformed_data(df[useful_features + ['Vote']])
+
+	base_feature = map(lambda x: dic[x], useful_features)
+	print "### Base features ###"
+	print list(set(base_feature))
+
 	embed()
 
 
