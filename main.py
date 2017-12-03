@@ -9,6 +9,7 @@ from sklearn.feature_selection import RFECV
 from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import preprocessing
+from sklearn.model_selection import StratifiedKFold
 
 # Tree-based feature selection
 from sklearn.ensemble import ExtraTreesClassifier
@@ -57,8 +58,8 @@ def fill_numeric_features(_df, features):
 def fill_categorical_features(_df, features):
 	for f in features:
 		for index, row in _df[_df[f].isnull()].iterrows():
-			most_common_ = _df[(_df.Vote == row['Vote'])][f].value_counts().idxmax()
-			_df.at[index, f] = most_common_
+			most_common = _df[(_df.Vote == row['Vote'])][f].value_counts().idxmax()
+			_df.at[index, f] = most_common
 
 
 def transform_categorical_features(_df, features):
@@ -78,7 +79,6 @@ def outliar_detection(_df, features):
 	for f in features:
 		std = _df[f].std()
 		mean = _df[f].mean()
-		# _df = _df[_df[f].between(mean - std_threshold * std, mean + std_threshold * std)]
 		_df[~_df[f].between(mean - std_threshold * std, mean + std_threshold * std)] = np.nan
 	return _df
 
@@ -157,6 +157,22 @@ def univariate_features_with_mi(data_X, data_Y, feature_names):
 	return result
 
 
+def select_features_with_rfe_with_stratified_k_fold(data_X, data_Y, feature_names):
+	result = []
+
+	svc = SVC(kernel="linear", C=1)
+	rfecv = RFECV(estimator=svc, step=1, cv=StratifiedKFold(2), scoring='accuracy')
+	rfecv.fit(data_X, data_Y)
+
+	print("RFE stratified_k - Optimal number of features : %d" % rfecv.n_features_)
+
+	for idx, val in enumerate(rfecv.get_support()):
+		if val:
+			print "RFE stratified_k - Choosing feature: " + feature_names[idx]
+			result.append(feature_names[idx])
+	return result
+
+
 def univariate_features_with_f_classif(data_X, data_Y, feature_names):
 	result = []
 
@@ -228,9 +244,12 @@ def main():
 	features_to_exclude = variance_filter(df_data_X, features_list)
 	redundant_features.extend(features_to_exclude)
 
-	# good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
-	# useful_features.extend(good_features)
+	good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
+	useful_features.extend(good_features)
 	#
+	good_features = select_features_with_rfe_with_stratified_k_fold(df_data_X, df_data_Y, features_list)
+	useful_features.extend(good_features)
+
 	good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
 	useful_features.extend(good_features)
 
@@ -241,9 +260,17 @@ def main():
 	useful_features.extend(good_features)
 
 	useful_features = list(set(useful_features))
-	embed()
+	print "### Useful features ###"
 	print useful_features
+
+	print "### Redundant features ###"
+	print redundant_features
+
+	print "### Final features ###"
+	print list(set(useful_features).difference(redundant_features))
+
 	export_transformed_data(df)
+	embed()
 
 
 if __name__ == '__main__':
