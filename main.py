@@ -57,7 +57,7 @@ def group_features(_df, _dic):
 
 def fill_numeric_features(_df, features):
 	for f in features:
-		_df[f].fillna(_df[f].median(), inplace=True)
+		_df[f + "_fill"].fillna(_df[f + "_fill"].median(), inplace=True)
 
 
 def fill_numeric_by_correlation(_df, factor, features):
@@ -75,16 +75,26 @@ def fill_numeric_by_correlation(_df, factor, features):
 def fill_f1_with_f2(_df, f1, f2):
 	ratio = _df[f1].mean() / _df[f2].mean()
 	print 'Filling ' + f1 + ' with ' + f2 + ' due to correlation'
-	for index, row in _df[_df[f1].isnull()].iterrows():
+	for index, row in _df[_df[f1 + "_fill"].isnull()].iterrows():
 		if ~np.isnan(_df[f2][index]):
-			_df[f1][index] = _df[f2][index] * ratio
+			_df[f1 + "_fill"][index] = _df[f2][index] * ratio
 
 	ratio = _df[f2].mean() / _df[f1].mean()
 	print 'Filling ' + f2 + ' with ' + f1 + ' due to correlation'
-	for index, row in _df[_df[f2].isnull()].iterrows():
+	for index, row in _df[_df[f2 + "_fill"].isnull()].iterrows():
 		if ~np.isnan(_df[f1][index]):
-			_df[f2][index] = _df[f1][index] * ratio
+			_df[f2 + "_fill"][index] = _df[f1][index] * ratio
 
+
+def remove_fill(_df, features):
+	for f in features:
+		_df[f] = _df[f + "_fill"]
+		del _df[f + "_fill"]
+
+
+def create_fill(_df, features):
+	for f in features:
+		_df[f + "_fill"] = _df[f]
 
 
 def fill_categorical_features(_df, features):
@@ -251,6 +261,10 @@ def embedded_features_by_descision_tree(data_X, data_Y, feature_names):
 	return result
 
 
+redundant_features = []
+useful_features = []
+dic = {}
+
 def main():
 	redundant_features = []
 	useful_features = []
@@ -259,12 +273,14 @@ def main():
 	df = import_data()
 
 	all_features, categorical_features, numeric_features = group_features(df, dic)
+	create_fill(df, numeric_features)
 	not_needed_features = fill_numeric_by_correlation(df, 0.95, numeric_features)
 	fill_numeric_by_correlation(df, 0.8, numeric_features)
 	print "# Added not_needed_features to redundant features"
 	redundant_features.extend(not_needed_features)
-
 	fill_numeric_features(df, numeric_features)
+	remove_fill(df, numeric_features)
+
 	fill_categorical_features(df, categorical_features)
 	# transform_categorical_features(df, categorical_features)  # We Don't need that!!
 	transform_label(df, "Vote")
