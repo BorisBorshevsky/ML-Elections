@@ -275,7 +275,7 @@ def main():
 	all_features, categorical_features, numeric_features = group_features(df, dic)
 	create_fill(df, numeric_features)
 	not_needed_features = fill_numeric_by_correlation(df, 0.95, numeric_features)
-	fill_numeric_by_correlation(df, 0.8, numeric_features)
+	fill_numeric_by_correlation(df, 0.7, numeric_features)
 	print "# Added not_needed_features to redundant features"
 	redundant_features.extend(not_needed_features)
 	fill_numeric_features(df, numeric_features)
