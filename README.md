@@ -32,3 +32,9 @@ Machine Learning 101
     4. Embedded methods
         1. decisions tree - pick 25% of the highets weight features
     5. Sum up all the features together.
+    
+3. Evaluating model
+    1. Trials – trying out different models.
+    2. Examination – after the trials we zoomed in on best models.
+    3. Training – Training the chosen models
+    4. Prediction - predicting based on the chosen models.
