@@ -341,5 +341,5 @@ print "Total Wrong predictions %d out of %d, hit rate: %f"% (miss_count, target1
 # In[60]:
 
 
-pred_test_labled.to_csv("test_predictions.csv",header=['Vote'] ,index=False)
+pred_test_labled.to_csv("/data/output/test_predictions.csv",header=['Vote'] ,index=False)
 
