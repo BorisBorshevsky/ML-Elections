@@ -11773,7 +11773,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -11804,7 +11804,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">load_prepared_data</span><span class="p">():</span>
@@ -11829,7 +11829,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df_train_X</span><span class="p">,</span> <span class="n">df_train_Y</span><span class="p">,</span> <span class="n">df_test_X</span><span class="p">,</span> <span class="n">df_test_Y</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">load_prepared_data</span><span class="p">()</span>
@@ -11846,7 +11846,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
@@ -11868,7 +11868,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>linear SVC score: 0.894135, std: 0.016005
+<pre>linear SVC score: 0.879021, std: 0.013906
 </pre>
 </div>
 </div>
@@ -11879,7 +11879,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">)</span>
@@ -11901,7 +11901,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>LinearSVC OVR Score: 0.900571, std: 0.014538
+<pre>LinearSVC OVR Score: 0.868753, std: 0.012212
 </pre>
 </div>
 </div>
@@ -11912,7 +11912,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;crammer_singer&#39;</span><span class="p">)</span>
@@ -11934,7 +11934,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>LinearSVC crammer_singer Score: 0.906420, std: 0.013568
+<pre>LinearSVC crammer_singer Score: 0.870310, std: 0.012343
 </pre>
 </div>
 </div>
@@ -11945,11 +11945,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[144]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">svc</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">OneVsOneClassifier</span><span class="p">(</span><span class="n">svc</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">OneVsOneClassifier</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">())</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> Score: </span><span class="si">%f</span><span class="s2">, std: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
 </pre></div>
@@ -11968,7 +11967,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>OneVsOneClassifier Score: 0.919214, std: 0.014935
+<pre>OneVsOneClassifier Score: 0.905737, std: 0.014711
 </pre>
 </div>
 </div>
@@ -11979,7 +11978,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
@@ -12012,21 +12011,21 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[146]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">splitter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
     <span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="n">splitter</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
     <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s2">&quot;minimus splitter = </span><span class="si">%d</span><span class="s2">, score = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">splitter</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;minimum splitter = </span><span class="si">%d</span><span class="s2">, score = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">splitter</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Best Splitter size: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> with best splitter: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">all_scores</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)])</span>
 
 <span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> Default score: </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
@@ -12045,27 +12044,27 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>minimus splitter = 2, score = 0.925955
-minimus splitter = 3, score = 0.926707
-minimus splitter = 4, score = 0.929093
-minimus splitter = 5, score = 0.930633
-minimus splitter = 6, score = 0.928047
-minimus splitter = 7, score = 0.929036
-minimus splitter = 8, score = 0.929990
-minimus splitter = 9, score = 0.928648
-minimus splitter = 10, score = 0.928674
-minimus splitter = 11, score = 0.929825
-minimus splitter = 12, score = 0.928855
-minimus splitter = 13, score = 0.925516
-minimus splitter = 14, score = 0.925342
-minimus splitter = 15, score = 0.924767
-minimus splitter = 16, score = 0.923404
-minimus splitter = 17, score = 0.923196
-minimus splitter = 18, score = 0.922429
-minimus splitter = 19, score = 0.922043
-Best Splitter size: 5
-DecisionTreeClassifier with best splitter: 0.930633
-DecisionTreeClassifier Default score: 0.925955
+<pre>minimum splitter = 2, score = 0.931029
+minimum splitter = 3, score = 0.931037
+minimum splitter = 4, score = 0.929864
+minimum splitter = 5, score = 0.931403
+minimum splitter = 6, score = 0.932374
+minimum splitter = 7, score = 0.933361
+minimum splitter = 8, score = 0.933549
+minimum splitter = 9, score = 0.933537
+minimum splitter = 10, score = 0.932958
+minimum splitter = 11, score = 0.932960
+minimum splitter = 12, score = 0.933149
+minimum splitter = 13, score = 0.933525
+minimum splitter = 14, score = 0.933131
+minimum splitter = 15, score = 0.933141
+minimum splitter = 16, score = 0.931596
+minimum splitter = 17, score = 0.931994
+minimum splitter = 18, score = 0.933155
+minimum splitter = 19, score = 0.931619
+Best Splitter size: 8
+DecisionTreeClassifier with best splitter: 0.933549
+DecisionTreeClassifier Default score: 0.931029
 </pre>
 </div>
 </div>
@@ -12076,13 +12075,13 @@ DecisionTreeClassifier Default score: 0.925955
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">splitter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
     <span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="n">splitter</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
     <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
     <span class="k">print</span> <span class="s2">&quot;minimum splitter = </span><span class="si">%d</span><span class="s2">, score = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">splitter</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
@@ -12090,7 +12089,7 @@ DecisionTreeClassifier Default score: 0.925955
 <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> with best splitter: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">all_scores</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)])</span>
 
 <span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> Default score: </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
@@ -12109,27 +12108,27 @@ DecisionTreeClassifier Default score: 0.925955
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>minimum splitter = 2, score = 0.946670
-minimum splitter = 3, score = 0.948827
-minimum splitter = 4, score = 0.951943
-minimum splitter = 5, score = 0.947105
-minimum splitter = 6, score = 0.947287
-minimum splitter = 7, score = 0.946150
-minimum splitter = 8, score = 0.945923
-minimum splitter = 9, score = 0.949397
-minimum splitter = 10, score = 0.944574
-minimum splitter = 11, score = 0.946851
-minimum splitter = 12, score = 0.943054
-minimum splitter = 13, score = 0.946655
-minimum splitter = 14, score = 0.945529
-minimum splitter = 15, score = 0.947304
-minimum splitter = 16, score = 0.947055
-minimum splitter = 17, score = 0.946091
-minimum splitter = 18, score = 0.942185
-minimum splitter = 19, score = 0.946858
+<pre>minimum splitter = 2, score = 0.949628
+minimum splitter = 3, score = 0.950242
+minimum splitter = 4, score = 0.951995
+minimum splitter = 5, score = 0.949627
+minimum splitter = 6, score = 0.949261
+minimum splitter = 7, score = 0.949468
+minimum splitter = 8, score = 0.949853
+minimum splitter = 9, score = 0.947952
+minimum splitter = 10, score = 0.948108
+minimum splitter = 11, score = 0.950255
+minimum splitter = 12, score = 0.946556
+minimum splitter = 13, score = 0.946952
+minimum splitter = 14, score = 0.944035
+minimum splitter = 15, score = 0.946767
+minimum splitter = 16, score = 0.946762
+minimum splitter = 17, score = 0.948711
+minimum splitter = 18, score = 0.947346
+minimum splitter = 19, score = 0.947522
 Best Splitter size: 4
-RandomForestClassifier with best splitter: 0.951943
-RandomForestClassifier Default score: 0.946670
+RandomForestClassifier with best splitter: 0.951995
+RandomForestClassifier Default score: 0.949628
 </pre>
 </div>
 </div>
@@ -12140,16 +12139,16 @@ RandomForestClassifier Default score: 0.946670
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
     <span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
     <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s2">&quot;minimum n_neighbors = </span><span class="si">%d</span><span class="s2">, score = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;minimum k_neighbors = </span><span class="si">%d</span><span class="s2">, score = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Best n_neighbors size: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;KNeighborsClassifier with best N param: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">all_scores</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)])</span>
 </pre></div>
@@ -12168,26 +12167,26 @@ RandomForestClassifier Default score: 0.946670
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>minimum n_neighbors = 2, score = 0.905779
-minimum n_neighbors = 3, score = 0.916074
-minimum n_neighbors = 4, score = 0.912584
-minimum n_neighbors = 5, score = 0.919978
-minimum n_neighbors = 6, score = 0.916100
-minimum n_neighbors = 7, score = 0.915899
-minimum n_neighbors = 8, score = 0.913968
-minimum n_neighbors = 9, score = 0.914135
-minimum n_neighbors = 10, score = 0.912396
-minimum n_neighbors = 11, score = 0.909670
-minimum n_neighbors = 12, score = 0.910648
-minimum n_neighbors = 13, score = 0.907146
-minimum n_neighbors = 14, score = 0.906557
-minimum n_neighbors = 15, score = 0.905389
-minimum n_neighbors = 16, score = 0.902088
-minimum n_neighbors = 17, score = 0.901114
-minimum n_neighbors = 18, score = 0.899555
-minimum n_neighbors = 19, score = 0.898974
-Best n_neighbors size: 5
-KNeighborsClassifier with best N param: 0.919978
+<pre>minimum k_neighbors = 2, score = 0.902213
+minimum k_neighbors = 3, score = 0.918114
+minimum k_neighbors = 4, score = 0.907826
+minimum k_neighbors = 5, score = 0.916752
+minimum k_neighbors = 6, score = 0.913081
+minimum k_neighbors = 7, score = 0.912299
+minimum k_neighbors = 8, score = 0.909593
+minimum k_neighbors = 9, score = 0.910556
+minimum k_neighbors = 10, score = 0.908232
+minimum k_neighbors = 11, score = 0.906881
+minimum k_neighbors = 12, score = 0.905926
+minimum k_neighbors = 13, score = 0.903800
+minimum k_neighbors = 14, score = 0.901478
+minimum k_neighbors = 15, score = 0.900868
+minimum k_neighbors = 16, score = 0.896038
+minimum k_neighbors = 17, score = 0.896219
+minimum k_neighbors = 18, score = 0.893895
+minimum k_neighbors = 19, score = 0.890801
+Best n_neighbors size: 3
+KNeighborsClassifier with best N param: 0.918114
 </pre>
 </div>
 </div>
@@ -12198,7 +12197,7 @@ KNeighborsClassifier with best N param: 0.919978
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -12220,7 +12219,7 @@ KNeighborsClassifier with best N param: 0.919978
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Perceptron Score: 0.880244, std: 0.016177
+<pre>Perceptron Score: 0.812833, std: 0.049600
 </pre>
 </div>
 </div>
@@ -12231,7 +12230,7 @@ KNeighborsClassifier with best N param: 0.919978
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">()</span>
@@ -12253,7 +12252,7 @@ KNeighborsClassifier with best N param: 0.919978
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>LinearDiscriminantAnalysis Score: 0.847154, std: 0.016647
+<pre>LinearDiscriminantAnalysis Score: 0.783866, std: 0.015864
 </pre>
 </div>
 </div>
@@ -12264,7 +12263,7 @@ KNeighborsClassifier with best N param: 0.919978
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -12286,7 +12285,7 @@ KNeighborsClassifier with best N param: 0.919978
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>RandomForestClassifier Score: 0.945082, std: 0.010452
+<pre>RandomForestClassifier Score: 0.947530, std: 0.008705
 </pre>
 </div>
 </div>
@@ -12297,40 +12296,7 @@ KNeighborsClassifier with best N param: 0.919978
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> Score: </span><span class="si">%f</span><span class="s2">, std: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>RandomForestClassifier Score: 0.945291, std: 0.009389
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> 
@@ -12366,10 +12332,10 @@ KNeighborsClassifier with best N param: 0.919978
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[147]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;***** </span><span class="si">%s</span><span class="s2"> *****&quot;</span> <span class="o">%</span> <span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="k">print</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -12392,18 +12358,18 @@ KNeighborsClassifier with best N param: 0.919978
 <pre>***** DecisionTreeClassifier *****
              precision    recall  f1-score   support
 
-      Blues    0.40000   0.37037   0.38462        27
-     Browns    0.89744   0.91418   0.90573      1072
-     Greens    0.98905   0.99013   0.98959       912
-      Greys    0.93696   0.94509   0.94101       346
-    Oranges    0.88599   0.88312   0.88455       308
-      Pinks    0.85062   0.83503   0.84275       491
-    Purples    0.96595   0.95878   0.96235      1213
-       Reds    0.93949   0.94249   0.94099       313
-     Whites    0.73367   0.72277   0.72818       202
-    Yellows    0.94048   0.93676   0.93861       253
+      Blues    0.46875   0.53571   0.50000        28
+     Browns    0.90331   0.93340   0.91811      1081
+     Greens    0.99473   0.99160   0.99316       952
+      Greys    0.96970   0.96096   0.96531       333
+    Oranges    0.89969   0.90252   0.90110       318
+      Pinks    0.85972   0.85458   0.85714       502
+    Purples    0.95703   0.94904   0.95302      1197
+       Reds    0.93103   0.93987   0.93543       316
+     Whites    0.78107   0.69841   0.73743       189
+    Yellows    0.95473   0.93548   0.94501       248
 
-avg / total    0.92301   0.92330   0.92312      5137
+avg / total    0.92977   0.92971   0.92958      5164
 
 </pre>
 </div>
@@ -12415,10 +12381,10 @@ avg / total    0.92301   0.92330   0.92312      5137
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;***** </span><span class="si">%s</span><span class="s2"> *****&quot;</span> <span class="o">%</span> <span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="k">print</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -12441,18 +12407,18 @@ avg / total    0.92301   0.92330   0.92312      5137
 <pre>***** KNeighborsClassifier *****
              precision    recall  f1-score   support
 
-      Blues    0.50000   0.03704   0.06897        27
-     Browns    0.86484   0.97295   0.91572      1072
-     Greens    0.99232   0.99123   0.99177       912
-      Greys    0.86479   0.88728   0.87589       346
-    Oranges    0.89247   0.80844   0.84838       308
-      Pinks    0.94203   0.79430   0.86188       491
-    Purples    0.97930   0.97527   0.97728      1213
-       Reds    0.84384   0.89776   0.86997       313
-     Whites    0.82781   0.61881   0.70822       202
-    Yellows    0.90647   0.99605   0.94915       253
+      Blues    0.26087   0.21429   0.23529        28
+     Browns    0.88003   0.97040   0.92301      1081
+     Greens    0.99260   0.98634   0.98946       952
+      Greys    0.85373   0.85886   0.85629       333
+    Oranges    0.85507   0.74214   0.79461       318
+      Pinks    0.95561   0.81474   0.87957       502
+    Purples    0.96787   0.98162   0.97470      1197
+       Reds    0.82303   0.92722   0.87202       316
+     Whites    0.90780   0.67725   0.77576       189
+    Yellows    0.91304   0.93145   0.92216       248
 
-avg / total    0.92093   0.92174   0.91814      5137
+avg / total    0.92102   0.92022   0.91853      5164
 
 </pre>
 </div>
@@ -12464,7 +12430,7 @@ avg / total    0.92093   0.92174   0.91814      5137
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[150]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -12490,67 +12456,18 @@ avg / total    0.92093   0.92174   0.91814      5137
 <pre>***** RandomForestClassifier *****
              precision    recall  f1-score   support
 
-      Blues    0.92308   0.44444   0.60000        27
-     Browns    0.89465   0.96642   0.92915      1072
-     Greens    0.99561   0.99561   0.99561       912
-      Greys    0.98802   0.95376   0.97059       346
-    Oranges    0.93016   0.95130   0.94061       308
-      Pinks    0.90562   0.82077   0.86111       491
-    Purples    0.97042   0.97362   0.97202      1213
-       Reds    0.95912   0.97444   0.96672       313
-     Whites    0.93038   0.72772   0.81667       202
-    Yellows    0.94382   0.99605   0.96923       253
+      Blues    0.86667   0.46429   0.60465        28
+     Browns    0.90378   0.97317   0.93719      1081
+     Greens    0.99579   0.99475   0.99527       952
+      Greys    0.96429   0.97297   0.96861       333
+    Oranges    0.94481   0.91509   0.92971       318
+      Pinks    0.94889   0.85060   0.89706       502
+    Purples    0.97828   0.97828   0.97828      1197
+       Reds    0.94753   0.97152   0.95938       316
+     Whites    0.89809   0.74603   0.81503       189
+    Yellows    0.93893   0.99194   0.96471       248
 
-avg / total    0.94784   0.94744   0.94616      5137
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;***** </span><span class="si">%s</span><span class="s2"> *****&quot;</span> <span class="o">%</span> <span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-<span class="k">print</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>***** RandomForestClassifier *****
-             precision    recall  f1-score   support
-
-      Blues    0.54545   0.44444   0.48980        27
-     Browns    0.90359   0.96175   0.93177      1072
-     Greens    0.99780   0.99561   0.99671       912
-      Greys    0.98489   0.94220   0.96307       346
-    Oranges    0.90826   0.96429   0.93543       308
-      Pinks    0.89805   0.84318   0.86975       491
-    Purples    0.97107   0.96867   0.96987      1213
-       Reds    0.97419   0.96486   0.96950       313
-     Whites    0.86310   0.71782   0.78378       202
-    Yellows    0.94553   0.96047   0.95294       253
-
-avg / total    0.94437   0.94471   0.94389      5137
+avg / total    0.95278   0.95256   0.95149      5164
 
 </pre>
 </div>
@@ -12562,12 +12479,12 @@ avg / total    0.94437   0.94471   0.94389      5137
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[186]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Training DecisionTreeClassifier&quot;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Estimating DecisionTreeClassifier&quot;</span>
 <span class="n">k_fold</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="ow">in</span> <span class="n">k_fold</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="n">clf_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">target</span><span class="p">[</span><span class="n">train_indices</span><span class="p">])</span>
@@ -12590,8 +12507,8 @@ avg / total    0.94437   0.94471   0.94389      5137
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training DecisionTreeClassifier
-training score, mean: 0.926039
+<pre>Estimating DecisionTreeClassifier
+training score, mean: 0.927700
 </pre>
 </div>
 </div>
@@ -12602,10 +12519,10 @@ training score, mean: 0.926039
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Training KNeighborsClassifier&quot;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Estimating KNeighborsClassifier&quot;</span>
 <span class="n">k_fold</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">clf_knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
@@ -12630,8 +12547,8 @@ training score, mean: 0.926039
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training KNeighborsClassifier
-training score, mean: 0.920734
+<pre>Estimating KNeighborsClassifier
+training score, mean: 0.920954
 </pre>
 </div>
 </div>
@@ -12642,10 +12559,10 @@ training score, mean: 0.920734
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Training RandomForestClassifier&quot;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Estimating RandomForestClassifier&quot;</span>
 <span class="n">k_fold</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">clf_random_forest</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
@@ -12670,7 +12587,7 @@ training score, mean: 0.920734
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training RandomForestClassifier
+<pre>Estimating RandomForestClassifier
 training score, mean: 0.942263
 </pre>
 </div>
@@ -12682,10 +12599,11 @@ training score, mean: 0.942263
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf_random_forest</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_test</span> <span class="o">=</span> <span class="n">df_test_X</span>
+<span class="n">target_test</span> <span class="o">=</span> <span class="n">df_test_Y</span>
 </pre></div>
 
 </div>
@@ -12695,12 +12613,55 @@ training score, mean: 0.942263
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[204]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_test</span> <span class="o">=</span> <span class="n">df_test_X</span>
-<span class="n">target_test</span> <span class="o">=</span> <span class="n">df_test_Y</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># clf = RandomForestClassifier(min_samples_split=4, random_state=0)</span>
+<span class="c1"># clf.fit(features, target)</span>
+
+<span class="c1"># clf = KNeighborsClassifier(n_neighbors=3)</span>
+<span class="c1"># clf.fit(features, target)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[204]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>DecisionTreeClassifier(class_weight=None, criterion=&#39;gini&#39;, max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=8,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter=&#39;best&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[205]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
 
 <span class="n">distribution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">))</span>
 <span class="n">most_common</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">distribution</span><span class="p">)</span>
@@ -12733,7 +12694,7 @@ training score, mean: 0.942263
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[206]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Vote distribution&quot;</span>
@@ -12758,16 +12719,16 @@ training score, mean: 0.942263
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Vote distribution
-Blues, 10.000000, 0.587199%
-Browns, 400.000000, 23.487962%
-Greens, 309.000000, 18.144451%
-Greys, 94.000000, 5.519671%
-Oranges, 104.000000, 6.106870%
-Pinks, 167.000000, 9.806224%
-Purples, 404.000000, 23.722842%
-Reds, 104.000000, 6.106870%
-Whites, 45.000000, 2.642396%
-Yellows, 66.000000, 3.875514%
+Blues, 11.000000, 0.644783%
+Browns, 366.000000, 21.453693%
+Greens, 316.000000, 18.522860%
+Greys, 104.000000, 6.096131%
+Oranges, 94.000000, 5.509965%
+Pinks, 163.000000, 9.554513%
+Purples, 406.000000, 23.798359%
+Reds, 118.000000, 6.916764%
+Whites, 64.000000, 3.751465%
+Yellows, 64.000000, 3.751465%
 </pre>
 </div>
 </div>
@@ -12778,7 +12739,7 @@ Yellows, 66.000000, 3.875514%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">target_test_labled</span> <span class="o">=</span> <span class="n">target_test</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">labels</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
@@ -12803,18 +12764,18 @@ Yellows, 66.000000, 3.875514%
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>             precision    recall  f1-score   support
 
-      Blues       0.60      0.55      0.57        11
-     Browns       0.91      0.97      0.94       377
-     Greens       0.99      0.98      0.99       312
-      Greys       0.98      0.93      0.95        99
-    Oranges       0.87      0.93      0.90        97
-      Pinks       0.92      0.92      0.92       167
-    Purples       0.97      0.98      0.98       399
-       Reds       0.95      0.93      0.94       106
-     Whites       0.82      0.53      0.64        70
-    Yellows       0.92      0.94      0.93        65
+      Blues       0.27      0.50      0.35         6
+     Browns       0.90      0.90      0.90       365
+     Greens       0.98      1.00      0.99       312
+      Greys       0.93      0.94      0.94       103
+    Oranges       0.86      0.87      0.87        93
+      Pinks       0.85      0.87      0.86       158
+    Purples       0.95      0.95      0.95       406
+       Reds       0.95      0.94      0.95       119
+     Whites       0.73      0.64      0.68        74
+    Yellows       0.97      0.89      0.93        70
 
-avg / total       0.94      0.94      0.94      1703
+avg / total       0.92      0.92      0.92      1706
 
 </pre>
 </div>
@@ -12826,10 +12787,11 @@ avg / total       0.94      0.94      0.94      1703
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[209]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">target_test_labled</span><span class="p">,</span> <span class="n">pred_test_labled</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">labels</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">target_test_labled</span><span class="p">,</span> <span class="n">pred_test_labled</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12842,22 +12804,33 @@ avg / total       0.94      0.94      0.94      1703
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[58]:</div>
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;Blues&#39;, &#39;Browns&#39;, &#39;Greens&#39;, &#39;Greys&#39;, &#39;Oranges&#39;, &#39;Pinks&#39;, &#39;Purples&#39;, &#39;Reds&#39;, &#39;Whites&#39;, &#39;Yellows&#39;]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[209]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[  6,   0,   0,   0,   0,   0,   0,   0,   0,   5],
-       [  0, 364,   2,   0,   0,   4,   1,   0,   6,   0],
-       [  0,   0, 307,   0,   0,   3,   2,   0,   0,   0],
-       [  0,   0,   0,  92,   7,   0,   0,   0,   0,   0],
-       [  0,   0,   0,   2,  90,   0,   0,   5,   0,   0],
-       [  0,  10,   0,   0,   0, 153,   2,   0,   2,   0],
-       [  0,   2,   0,   0,   0,   4, 393,   0,   0,   0],
-       [  0,   0,   0,   0,   7,   0,   0,  99,   0,   0],
-       [  0,  24,   0,   0,   0,   3,   6,   0,  37,   0],
-       [  4,   0,   0,   0,   0,   0,   0,   0,   0,  61]])</pre>
+<pre>array([[  3,   0,   0,   1,   0,   0,   0,   0,   0,   2],
+       [  0, 329,   2,   0,   0,  12,   7,   0,  15,   0],
+       [  0,   0, 311,   0,   0,   0,   1,   0,   0,   0],
+       [  0,   0,   0,  97,   6,   0,   0,   0,   0,   0],
+       [  0,   0,   0,   6,  81,   0,   0,   6,   0,   0],
+       [  0,  14,   0,   0,   0, 138,   6,   0,   0,   0],
+       [  0,   7,   3,   0,   0,  10, 384,   0,   2,   0],
+       [  0,   0,   0,   0,   7,   0,   0, 112,   0,   0],
+       [  0,  16,   0,   0,   0,   3,   8,   0,  47,   0],
+       [  8,   0,   0,   0,   0,   0,   0,   0,   0,  62]])</pre>
 </div>
 
 </div>
@@ -12868,7 +12841,7 @@ avg / total       0.94      0.94      0.94      1703
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[210]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pred1</span> <span class="o">=</span> <span class="n">pred_test_labled</span><span class="o">.</span><span class="n">values</span>   
@@ -12904,7 +12877,7 @@ avg / total       0.94      0.94      0.94      1703
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Total Wrong predictions 101 out of 1703, hit rate: 94.069289%
+<pre>Total Wrong predictions 142 out of 1706, hit rate: 91.676436%
 </pre>
 </div>
 </div>
@@ -12915,10 +12888,10 @@ avg / total       0.94      0.94      0.94      1703
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[158]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pred_test_labled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;/data/output/test_predictions.csv&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Vote&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pred_test_labled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;./data/output/test_predictions.csv&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Vote&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 
 </div>

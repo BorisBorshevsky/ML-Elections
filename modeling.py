@@ -1,6 +1,7 @@
 import pandas as pd
 
 import numpy as np
+from IPython import embed
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -67,7 +68,7 @@ def main():
 	all_scores = []
 	for splitter in range(2, 20):
 		clf = DecisionTreeClassifier(min_samples_split=splitter, random_state=0)
-		scores = cross_val_score(clf, features, target, cv=20)
+		scores = cross_val_score(clf, features, target, cv=15)
 		score = np.mean(scores)
 		all_scores.append(score)
 		print "DecisionTreeClassifier, splitter = {:d}, score = {:f}".format(splitter, score)
@@ -76,14 +77,14 @@ def main():
 	print "{} with best splitter: {:f}".format(clf.__class__.__name__, all_scores[np.argmax(all_scores)])
 
 	clf = DecisionTreeClassifier(random_state=0)
-	scores = cross_val_score(clf, features, target, cv=20)
+	scores = cross_val_score(clf, features, target, cv=15)
 	score = np.mean(scores)
 	print "{} Default score: {:f}".format(clf.__class__.__name__, score)
 
 	all_scores = []
 	for n in range(2, 20):
 		clf = KNeighborsClassifier(n_neighbors=n)
-		scores = cross_val_score(clf, features, target, cv=10)
+		scores = cross_val_score(clf, features, target, cv=15)
 		score = np.mean(scores)
 		all_scores.append(score)
 		print "minimum n_neighbors = %d, score = %f" % (n, score)
@@ -93,7 +94,7 @@ def main():
 	all_scores = []
 	for splitter in range(2, 20):
 		clf = RandomForestClassifier(min_samples_split=splitter, random_state=0)
-		scores = cross_val_score(clf, features, target, cv=20)
+		scores = cross_val_score(clf, features, target, cv=15)
 		score = np.mean(scores)
 		all_scores.append(score)
 		print "minimum splitter = %d, score = %f" % (splitter, score)
@@ -101,7 +102,7 @@ def main():
 	print "%s with best splitter: %f" % (clf.__class__.__name__, all_scores[np.argmax(all_scores)])
 
 	clf = RandomForestClassifier(random_state=0)
-	scores = cross_val_score(clf, features, target, cv=20)
+	scores = cross_val_score(clf, features, target, cv=15)
 	score = np.mean(scores)
 	print "%s Default score: %f" % (clf.__class__.__name__, score)
 
@@ -128,12 +129,12 @@ def main():
 	print "Trying best Models"
 	print "################################"
 
-	clf = DecisionTreeClassifier(min_samples_split=5, random_state=0)
+	clf = DecisionTreeClassifier(min_samples_split=8, random_state=0)
 	pred = cross_val_predict(clf, features, target, cv=30)
 	print "***** %s *****" % clf.__class__.__name__
 	print classification_report(target, pred, target_names=labels, digits=5)
 
-	clf = KNeighborsClassifier(n_neighbors=5)
+	clf = KNeighborsClassifier(n_neighbors=3)
 	pred = cross_val_predict(clf, features, target, cv=30)
 	print "***** %s *****" % clf.__class__.__name__
 	print classification_report(target, pred, target_names=labels, digits=5)
@@ -147,7 +148,7 @@ def main():
 	print "Trying best Models"
 	print "################################"
 
-	print "Training DecisionTreeClassifier"
+	print "Estimating DecisionTreeClassifier with split = 5"
 	k_fold = RepeatedStratifiedKFold(n_splits=5, random_state=0)
 	clf_tree = DecisionTreeClassifier(min_samples_split=5, random_state=0)
 	a = []
@@ -157,17 +158,16 @@ def main():
 
 	print "training score, mean: %f" % (np.array(a).mean())
 
-	print "Training KNeighborsClassifier"
+	print "Estimating KNeighborsClassifier with k = 5"
 	k_fold = RepeatedStratifiedKFold(n_splits=5, random_state=0)
 	clf_knn = KNeighborsClassifier(n_neighbors=5)
 	a = []
 	for train_indices, test_indices in k_fold.split(features, target):
 		clf_knn.fit(features[train_indices], target[train_indices])
 		a.append(clf_knn.score(features[test_indices], target[test_indices]))
-
 	print "training score, mean: %f" % (np.array(a).mean())
 
-	print "Training RandomForestClassifier"
+	print "Estimating RandomForestClassifier with split=4"
 	k_fold = RepeatedStratifiedKFold(n_splits=5, random_state=0)
 	clf_random_forest = RandomForestClassifier(random_state=0, min_samples_split=4, max_features=None)
 	a = []
@@ -181,7 +181,12 @@ def main():
 	print "Best Classifier %s" % clf_random_forest.__class__.__name__
 	print "#######################"
 
-	clf = clf_random_forest
+	print "################"
+	print "Training Random forest"
+	print "################"
+
+	clf = RandomForestClassifier(min_samples_split=4, random_state=0)
+	clf.fit(features, target)
 
 	print "#######################"
 	print "Prediction"

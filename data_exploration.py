@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[26]:
+# In[83]:
 
 
 import matplotlib.pyplot as plt
@@ -270,7 +270,7 @@ dic = {}
 
 # # Import the data
 
-# In[27]:
+# In[84]:
 
 
 df = import_data()
@@ -278,13 +278,13 @@ df = import_data()
 
 # # Look at the Data
 
-# In[28]:
+# In[85]:
 
 
 df.describe()
 
 
-# In[29]:
+# In[86]:
 
 
 df.info()
@@ -292,7 +292,7 @@ df.info()
 
 # ## Map the features
 
-# In[30]:
+# In[87]:
 
 
 all_features, categorical_features, numeric_features = group_features(df, dic)
@@ -313,7 +313,7 @@ for f in numeric_features.columns:
 # ### Unreasonable Data
 # We thought to remove unreasonable data, but the graphs say otherwize, so we kept them.
 
-# In[31]:
+# In[88]:
 
 
 df['Vote'].value_counts().plot(kind='bar')
@@ -339,7 +339,7 @@ p.show()
 # We used corelated features to fill data.
 # Features that ware too corlated ware redundent and removed.
 
-# In[32]:
+# In[89]:
 
 
 def print_coorlation(_df, factor, features):
@@ -359,7 +359,7 @@ print_coorlation(df, 0.8, numeric_features)
 
 # ###  Distribution before compition
 
-# In[33]:
+# In[90]:
 
 
 for f in numeric_features:
@@ -372,7 +372,7 @@ for f in numeric_features:
 # Here we are checking that we didn't hurt too much the distribution by filling the values
 # 
 
-# In[34]:
+# In[91]:
 
 
 create_fill(df, numeric_features)
@@ -394,7 +394,7 @@ df.info()
 
 # ### Fill Categorial
 
-# In[35]:
+# In[92]:
 
 
 fill_categorical_features(df, categorical_features)
@@ -403,7 +403,7 @@ df.info()
 
 # ### Transform categorial
 
-# In[36]:
+# In[93]:
 
 
 transform_label(df, "Vote")
@@ -412,7 +412,7 @@ transform_manual(df, dic)
 
 # ### Scale Numeric
 
-# In[37]:
+# In[94]:
 
 
 scale_numeric(df, numeric_features)
@@ -424,7 +424,7 @@ for f in numeric_features:
 
 # ### Remove Outliar
 
-# In[38]:
+# In[95]:
 
 
 df = outliar_detection(df, numeric_features)
@@ -432,7 +432,7 @@ df = outliar_detection(df, numeric_features)
 
 # ### Transform to NP Array
 
-# In[39]:
+# In[96]:
 
 
 df_no_NAN = df.drop(redundant_features, axis=1).dropna()
@@ -443,7 +443,7 @@ df_data_X = preprocessing.scale(df_data_X)
 
 # ### Variance Filter
 
-# In[40]:
+# In[97]:
 
 
 features_to_exclude = variance_filter(df_data_X, features_list)
@@ -452,7 +452,7 @@ redundant_features.extend(features_to_exclude)
 
 # ### Univariate feature selection
 
-# In[41]:
+# In[98]:
 
 
 good_features = univariate_features_with_mi(df_data_X, df_data_Y, features_list)
@@ -461,7 +461,7 @@ print list(set(good_features).difference(useful_features))
 useful_features.extend(good_features)
 
 
-# In[42]:
+# In[99]:
 
 
 good_features = univariate_features_with_f_classif(df_data_X, df_data_Y, features_list)
@@ -470,7 +470,7 @@ print list(set(good_features).difference(useful_features))
 useful_features.extend(good_features)
 
 
-# In[43]:
+# In[100]:
 
 
 good_features = embedded_features_by_descision_tree(df_data_X, df_data_Y, features_list)
@@ -481,7 +481,7 @@ useful_features.extend(good_features)
 
 # ### Wrapper Method
 
-# In[44]:
+# In[101]:
 
 
 good_features = select_features_with_rfe(df_data_X, df_data_Y, features_list)
@@ -490,7 +490,7 @@ print list(set(good_features).difference(useful_features))
 useful_features.extend(good_features)
 
 
-# In[45]:
+# In[102]:
 
 
 good_features = select_features_with_rfe_with_stratified_k_fold(df_data_X, df_data_Y, features_list)
@@ -501,7 +501,7 @@ useful_features.extend(good_features)
 
 # Useful feature
 
-# In[46]:
+# In[103]:
 
 
 useful_features = list(set(useful_features))
@@ -510,7 +510,7 @@ useful_features
 
 # Redundant features
 
-# In[47]:
+# In[104]:
 
 
 redundant_features
@@ -518,23 +518,45 @@ redundant_features
 
 # Final features
 
-# In[48]:
+# In[106]:
 
+
+# Number_of_valued_Kneset_members,
+# Yearly_Income,
+# Overall_happiness_score,
+# Avg_Satisfaction_with_previous_vote, Avg_monthly_expense_when_under_age_21
+# Most_Important_Issue, Will_vote_only_large_party, Garden_sqr_meter_per_person_in_residancy_area, Weighted_education_rank
 
 list(set(useful_features).difference(redundant_features))
 
 
 # Base Features
 
-# In[49]:
+# In[107]:
 
 
 base_feature = map(lambda x: dic[x], useful_features)
 list(set(base_feature))
 
 
-# In[50]:
+# In[108]:
 
 
-export_transformed_data(df[useful_features + ['Vote', 'split']])
+fixes_useful_features = [
+    'Avg_Satisfaction_with_previous_vote',
+    'Number_of_valued_Kneset_members',
+    'Yearly_IncomeK',
+    'Overall_happiness_score',
+    'Avg_monthly_expense_when_under_age_21',
+    'Will_vote_only_large_party',
+    'Garden_sqr_meter_per_person_in_residancy_area',
+    'Is_Most_Important_Issue_Other',
+    'Is_Most_Important_Issue_Financial',
+    'Is_Most_Important_Issue_Environment',
+    'Is_Most_Important_Issue_Military',
+    'Is_Most_Important_Issue_Education',
+    'Is_Most_Important_Issue_Foreign_Affairs',
+    'Is_Most_Important_Issue_Social'
+]
+export_transformed_data(df[fixes_useful_features + ['Vote', 'split']])
 
