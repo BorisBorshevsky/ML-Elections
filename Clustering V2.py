@@ -217,6 +217,12 @@ def basic_distribution(dist):
         print "Group: %s, Distribution: %s"%(str(key), sorted(keys))
 
 
+# In[91]:
+
+
+
+
+
 # ### Distrebution per cluster
 
 # In[14]:
@@ -268,7 +274,7 @@ for i in dist_per_party:
 
 # ### Distances Between cluster centers
 
-# In[18]:
+# In[94]:
 
 
 from sklearn.metrics.pairwise import euclidean_distances
@@ -276,11 +282,6 @@ from sklearn.metrics.pairwise import euclidean_distances
 def build_distance_matrix(clf):
     m = euclidean_distances(clf.cluster_centers_, clf.cluster_centers_)
     m = np.around(m, decimals=3)
-    
-#     for i in range(len(m)):
-#         for j in range(len(m)):
-#             if i < j:
-#                 m[i][j] = 0
     
     matrix = np.matrix(m)
     plt.imshow(matrix, interpolation='nearest')
@@ -294,6 +295,40 @@ for i in matrix:
     print i
 
 
+print "Mean distance: %f" %matrix.mean()
+
+
+# ### Trying GMM to see distances
+
+# In[96]:
+
+
+from sklearn import mixture
+from sklearn.metrics.pairwise import euclidean_distances
+
+gmm = mixture.GaussianMixture(n_components=k, covariance_type='full', random_state=0).fit(df_train_X)
+
+def build_distance_matrix_gmm(gmm):
+    m = euclidean_distances(gmm.means_, gmm.means_)
+    m = np.around(m, decimals=3)
+    
+
+    matrix = np.matrix(m)
+    plt.imshow(matrix, interpolation='nearest')
+    plt.colorbar()
+    plt.grid(True)
+    plt.show()
+    return matrix
+
+gmm_dist = build_distance_matrix_gmm(gmm)
+print gmm_dist
+
+print "Mean distance: %f" %gmm_dist.mean()
+
+
+# Mean distance between clusters in gmm is smaller than in Kmeans
+# 
+# We continue with kmeans since it is more stable (distances are bigger)
 
 # ### Grouping Clusters to Coalition
 
