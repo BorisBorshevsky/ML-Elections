@@ -3,5 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../MLEx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Machine-Learning" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Machine-Learning-Homework" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../idc-machine-learning" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ranisharim" vcs="Git" />
   </component>
 </project>

@@ -1,13 +1,12 @@
 
 # coding: utf-8
 
-# In[72]:
+# In[1]:
 
 
 import pandas as pd
 
 import numpy as np
-from IPython import embed
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -25,8 +24,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.ensemble import RandomForestClassifier
 
 
-
-# In[113]:
+# In[2]:
 
 
 def load_prepared_data():
@@ -44,7 +42,7 @@ def load_prepared_data():
 	return df_train_X, df_train_Y, df_test_X, df_test_Y, labels
 
 
-# In[114]:
+# In[3]:
 
 
 df_train_X, df_train_Y, df_test_X, df_test_Y, labels = load_prepared_data()
@@ -54,7 +52,7 @@ features = train_val_data.values
 target = pd.concat([df_train_Y]).values
 
 
-# In[115]:
+# In[4]:
 
 
 clf = SVC(kernel='linear')
@@ -62,7 +60,7 @@ scores = cross_val_score(clf, features, target, cv=15)
 print "linear %s score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[116]:
+# In[5]:
 
 
 clf = LinearSVC(multi_class='ovr')
@@ -70,7 +68,7 @@ scores = cross_val_score(clf, features, target, cv=15)
 print "%s OVR Score: %f, std: %f" % (clf.__class__.__name__,np.mean(scores), np.std(scores))
 
 
-# In[117]:
+# In[6]:
 
 
 clf = LinearSVC(multi_class='crammer_singer')
@@ -78,8 +76,7 @@ scores = cross_val_score(clf, features, target, cv=15)
 print "%s crammer_singer Score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[144]:
-
+# In[7]:
 
 
 clf = OneVsOneClassifier(LinearSVC())
@@ -87,7 +84,7 @@ scores = cross_val_score(clf, features, target, cv=15)
 print "%s Score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[79]:
+# In[8]:
 
 
 clf = GaussianNB()
@@ -95,7 +92,7 @@ scores = cross_val_score(clf, features, target, cv=15)
 print "%s Score: %f" % (clf.__class__.__name__, np.mean(scores))
 
 
-# In[146]:
+# In[9]:
 
 
 all_scores = []
@@ -114,7 +111,7 @@ score = np.mean(scores)
 print "%s Default score: %f"% (clf.__class__.__name__, score)
 
 
-# In[120]:
+# In[10]:
 
 
 all_scores = []
@@ -133,7 +130,7 @@ score = np.mean(scores)
 print "%s Default score: %f"% (clf.__class__.__name__, score)
 
 
-# In[145]:
+# In[11]:
 
 
 all_scores = []
@@ -147,7 +144,7 @@ print "Best n_neighbors size: %d" % (np.argmax(all_scores) + 2)
 print "KNeighborsClassifier with best N param: %f" % (all_scores[np.argmax(all_scores)])
 
 
-# In[122]:
+# In[12]:
 
 
 clf = Perceptron(max_iter=300)
@@ -155,7 +152,7 @@ scores = cross_val_score(clf, features, target, cv=10)
 print "%s Score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[123]:
+# In[13]:
 
 
 clf = LinearDiscriminantAnalysis()
@@ -163,7 +160,7 @@ scores = cross_val_score(clf, features, target, cv=10)
 print "%s Score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[124]:
+# In[14]:
 
 
 clf = RandomForestClassifier(random_state=0)
@@ -171,7 +168,7 @@ scores = cross_val_score(clf, features, target, cv=10)
 print "%s Score: %f, std: %f" % (clf.__class__.__name__, np.mean(scores), np.std(scores))
 
 
-# In[87]:
+# In[15]:
 
 
 clf = MLPClassifier(verbose=0, activation='relu', hidden_layer_sizes=(50, 25, 10), 
@@ -182,7 +179,7 @@ scores = cross_val_score(clf, features, target, cv=10)
 print "MLPClassifier Score: %f, std: %f" % (np.mean(scores), np.std(scores))
 
 
-# In[147]:
+# In[16]:
 
 
 clf = DecisionTreeClassifier(min_samples_split=8, random_state=0)
@@ -191,7 +188,7 @@ print "***** %s *****" % clf.__class__.__name__
 print classification_report(target, pred, target_names=labels, digits=5)
 
 
-# In[148]:
+# In[17]:
 
 
 clf = KNeighborsClassifier(n_neighbors=3)
@@ -200,7 +197,7 @@ print "***** %s *****" % clf.__class__.__name__
 print classification_report(target, pred, target_names=labels, digits=5)
 
 
-# In[150]:
+# In[18]:
 
 
 clf = RandomForestClassifier(min_samples_split=4, random_state=0)
@@ -209,7 +206,7 @@ print "***** %s *****" % clf.__class__.__name__
 print classification_report(target, pred, target_names=labels, digits=5)
 
 
-# In[186]:
+# In[19]:
 
 
 print "Estimating DecisionTreeClassifier"
@@ -220,10 +217,10 @@ for train_indices, test_indices in k_fold.split(features, target):
     clf_tree.fit(features[train_indices], target[train_indices])
     a.append(clf_tree.score(features[test_indices],target[test_indices]))
     
-print "training score, mean: %f"% (np.array(a).mean())    
+print "training score, mean: %f"% (np.array(a).mean())
 
 
-# In[93]:
+# In[20]:
 
 
 print "Estimating KNeighborsClassifier"
@@ -234,10 +231,10 @@ for train_indices, test_indices in k_fold.split(features, target):
     clf_knn.fit(features[train_indices], target[train_indices])
     a.append(clf_knn.score(features[test_indices],target[test_indices]))
     
-print "training score, mean: %f"% (np.array(a).mean())    
+print "training score, mean: %f"% (np.array(a).mean())
 
 
-# In[94]:
+# In[21]:
 
 
 print "Estimating RandomForestClassifier"
@@ -248,33 +245,36 @@ for train_indices, test_indices in k_fold.split(features, target):
     clf_random_forest.fit(features[train_indices], target[train_indices])
     a.append(clf_random_forest.score(features[test_indices],target[test_indices]))
     
-print "training score, mean: %f"% (np.array(a).mean())    
+print "training score, mean: %f"% (np.array(a).mean())
 
 
-# In[95]:
+# In[22]:
 
 
 features_test = df_test_X
 target_test = df_test_Y
 
 
-# In[204]:
+# In[31]:
 
 
-# clf = RandomForestClassifier(min_samples_split=4, random_state=0)
-# clf.fit(features, target)
+features_test.describe()
+
+
+# In[23]:
+
+
+clf = RandomForestClassifier(min_samples_split=4, random_state=0)
+clf.fit(features, target)
 
 # clf = KNeighborsClassifier(n_neighbors=3)
 # clf.fit(features, target)
 
-clf = DecisionTreeClassifier(min_samples_split=8)
-clf.fit(features, target)
+# clf = DecisionTreeClassifier(min_samples_split=8)
+# clf.fit(features, target)
 
 
-
-
-# In[205]:
-
+# In[24]:
 
 
 pred = clf.predict(features_test)
@@ -285,7 +285,7 @@ most_common = np.argmax(distribution)
 print "winner is party ## %s ##" % labels[most_common.astype('int')]
 
 
-# In[206]:
+# In[25]:
 
 
 print "Vote distribution"
@@ -295,7 +295,7 @@ for index,party in enumerate(distribution):
     print "%s, %f, %f"%(labels[index], distribution[index], distribution[index]/ float(target_test.size) * 100) + '%'
 
 
-# In[207]:
+# In[26]:
 
 
 target_test_labled = target_test.map(lambda x: labels[int(x)])
@@ -304,14 +304,14 @@ pred_test_labled = pd.DataFrame(pred).applymap(lambda x: labels[int(x)])
 print(classification_report(target_test_labled, pred_test_labled, target_names=labels))
 
 
-# In[209]:
+# In[27]:
 
 
 print labels
 confusion_matrix(target_test_labled, pred_test_labled, labels=labels)
 
 
-# In[210]:
+# In[28]:
 
 
 pred1 = pred_test_labled.values   
@@ -333,7 +333,7 @@ for i, j in enumerate(pred1):
 print "Total Wrong predictions %d out of %d, hit rate: %f"% (miss_count, target1.size, 100 - miss_count/float(target1.size) * 100) + '%'
 
 
-# In[158]:
+# In[29]:
 
 
 pred_test_labled.to_csv("./data/output/test_predictions.csv",header=['Vote'] ,index=False)

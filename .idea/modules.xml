@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ML-Elections.iml" filepath="$PROJECT_DIR$/.idea/ML-Elections.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../MLEx/.idea/ML_Course.iml" filepath="$PROJECT_DIR$/../MLEx/.idea/ML_Course.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Machine-Learning-Homework/.idea/Machine-Learning-Homework.iml" filepath="$PROJECT_DIR$/../Machine-Learning-Homework/.idea/Machine-Learning-Homework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ranisharim/.idea/ranisharim.iml" filepath="$PROJECT_DIR$/../ranisharim/.idea/ranisharim.iml" />
       <module fileurl="file://$PROJECT_DIR$/../the-elections-challenge/.idea/the-elections-challenge.iml" filepath="$PROJECT_DIR$/../the-elections-challenge/.idea/the-elections-challenge.iml" />
     </modules>
   </component>

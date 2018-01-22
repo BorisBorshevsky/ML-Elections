@@ -4,7 +4,8 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 2.7.13 (~/.pyenv/versions/anaconda2-5.0.0/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ML_Course" />
+    <orderEntry type="module" module-name="ranisharim" />
+    <orderEntry type="module" module-name="Machine-Learning-Homework" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
